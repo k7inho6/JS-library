@@ -14,6 +14,18 @@ html {
   flex-direction: column;
 }
 
+.modal-header {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-button {
+  width: 50px;
+  font-weight: bold;
+}
+
+
 .button-container {
   padding: 5px;
   background-color: #2A2929;
@@ -27,8 +39,6 @@ button {
   width: 10vw;
 }
 
-
-
 .card-container {
   height: 50vh;
   background-color: blue;
@@ -36,14 +46,41 @@ button {
 
 #modal {
   background-color: #27272a;
-  padding: 30px;
+  z-index: 10;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0);
+}
+
+#modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.title {
+  font-weight: bold;
+  font-size: larger;
+  margin-bottom: 10px;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+  pointer-events: none;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
 input {
@@ -51,6 +88,7 @@ input {
  background-color: white;
  padding: 5px;
 }
+
 
 form {
   display: flex;
@@ -61,4 +99,8 @@ form {
 #readLabel {
   color: white;
   margin-right: 10px;
+}
+
+#addButton {
+  cursor: pointer;
 }

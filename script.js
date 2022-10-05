@@ -23,13 +23,30 @@ function displayBooks() {
     }
 }
 
-const addButton = document.getElementById("addButton");
-addButton.addEventListener('click', addBookToLibrary);
+/*const addButton = document.getElementById("addButton");
+addButton.addEventListener('click', addBookToLibrary);*/
 
-let modal = document.querySelector('div#modal');
+const openModalButtons = document.querySelector('#addButton');
+const closeModalButtons = document.querySelector('#closeButton');
+const overlay = document.getElementById('overlay');
+
+let modal = document.querySelector('#modal');
 modal.classList.add('rounded');
+
+closeModalButtons.addEventListener('click', closeModal);
+openModalButtons.addEventListener('click', openModal);
 
 let input = document.querySelectorAll('input');
 for (let elem of input) {
     elem.classList.add('rounded');
+}
+
+function openModal() {
+    modal.classList.add('active');
+    overlay.classList.add('active');
+}
+
+function closeModal() {
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
 }
