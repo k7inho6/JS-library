@@ -83,7 +83,8 @@ button {
   pointer-events: all;
 }
 
-input {
+input.textbox {
+ all: unset;
  border: none;
  background-color: white;
  padding: 5px;
@@ -103,4 +104,6 @@ form {
 
 #addButton {
   cursor: pointer;
+  font-weight: bold;
+  font-size: larger;
 }
