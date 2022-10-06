@@ -13,7 +13,7 @@
     <script src="script.js" defer></script>
 
     <div class="top">
-
+        JS Library
     </div>
 
     <div class="mid" id="container">
@@ -30,20 +30,20 @@
             </div>
             <form>
                 <div>
-                    <input class="textbox" type="text" id="author" name="author" placeholder="Author">
+                    <input class="textbox" type="text" id="author" name="author" placeholder="Author" required>
                 </div>
                 <div>
-                    <input class="textbox" type="text" id="title" name="title" placeholder="Title">
+                    <input class="textbox" type="text" id="title" name="title" placeholder="Title" required>
                 </div>
                 <div>
-                    <input class="textbox" type="text" id="pages" name="pages" placeholder="Pages">
+                    <input class="textbox" type="text" id="pages" name="pages" placeholder="Pages" required>
                 </div>
                 <div>
                     <label for="read" id="readLabel">Already read?</label>
                     <input type="checkbox" id="checkbox">
                 </div>
-            </form>
-            <button type="button" class="btn btn-dark" id="submitButton">Submit</button>
+                <input type="submit" value="Submit" class="btn btn-dark" id="submitButton">Submit</button>
+            </form> 
         </div>
         <div id="overlay"></div>
     </div>
@@ -51,6 +51,5 @@
     <div class="bottom">
 
     </div>
-
 </body>
 </html>

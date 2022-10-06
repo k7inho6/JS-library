@@ -3,9 +3,13 @@ html {
 }
 
 .top {
-  height: 20vh;
+  height: 15vh;
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  margin-left: 20vw;
+  padding-top: 5vh;
+  font-weight: bold;
+  font-size: 40px;
 }
 
 .mid {
