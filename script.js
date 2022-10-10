@@ -74,7 +74,6 @@ const createCard = (book) => {
 }
 
 function displayBooks() {
-    resetCardContainer();
 
     for (let book of library.books) {
         createCard(book);
@@ -82,13 +81,13 @@ function displayBooks() {
 }
 
 const openModalButtons = document.querySelector('#addButton');
-//const closeModalButtons = document.querySelector('#closeButton');
+const closeModalButtons = document.querySelector('#closeButton');
 const overlay = document.getElementById('overlay');
 
 let modal = document.querySelector('#modal');
 modal.classList.add('rounded');
 
-//closeModalButtons.addEventListener('click', closeModal);
+closeModalButtons.addEventListener('click', closeModal);
 openModalButtons.addEventListener('click', openModal);
 
 let input = document.querySelectorAll('input');
