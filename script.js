@@ -1,42 +1,94 @@
-let myLibrary = [];
+/*let myLibrary = [];*/
 const cardContainer = document.getElementById("card-container");
-let curAuthor = 'hm';
+/*let curAuthor = 'hm';
 let curTitle = '';
 let curPages = '';
-let curRead = false;
+let curRead = false;*/
 
-function Book (author, title, pages, read) {
-    this.author = author,
-    this.title = title,
-    this.pages = pages,
-    this.read = read
-}
-
-function addBookToLibrary(Book) {
-    myLibrary.push(Book);
-}
-
-function displayBooks() {
-    for (let prop in myLibrary) {
-        let i = 1;
-        let cell = document.createElement("div");
-        cardContainer.appendChild(cell).className = "card";
-        cell.id = `card-item${i}`;
-        i += 1;
+class Book {
+    constructor(author = 'Unknown', title = 'Unknown', pages = '0', read = false) {
+        this.author = author,
+        this.title = title,
+        this.pages = pages,
+        this.read = read
     }
 }
 
-/*const addButton = document.getElementById("addButton");
-addButton.addEventListener('click', addBookToLibrary);*/
+class Library { 
+    constructor() {
+        this.books = [];
+    }
+
+    isInLibrary(newBook) {
+        return this.books.some((book) => book.title === newBook.title);
+    }
+
+    addBookToLibrary(newBook) {
+        if (!this.isInLibrary(newBook)) {
+            this.books.push(newBook);
+        }
+    }
+
+    removeBookFromLibrary(title) {
+        this.books = this.books.filter((book) => book.title !== title);
+    }
+}
+
+const library = new Library();
+
+function resetCardContainer() {
+    cardContainer.innerHTML = '';
+}
+
+const createCard = (book) => {
+    const bookCard = document.createElement('div');
+    const author = document.createElement('p');
+    const title = document.createElement('p');
+    const pages = document.createElement('p');
+
+    const buttonContainer = document.createElement('div');
+    const read = document.createElement('button');
+    const remove = document.createElement('button');
+
+    bookCard.classList.add('book-card');
+    buttonContainer.classList.add('card-button-container');
+    read.classList.add('btn', 'btn-light');
+    remove.classList.add('btn', 'btn-light');
+
+    bookCard.appendChild(title);
+    bookCard.appendChild(author);
+    bookCard.appendChild(title);
+    bookCard.appendChild(pages);
+    bookCard.appendChild(buttonContainer);
+
+    buttonContainer.appendChild(read);
+    buttonContainer.appendChild(remove);
+
+    author.textContent = `${book.author}`;
+    title.textContent = `"${book.title}"`;
+    pages.textContent = `${book.pages}`;
+    read.textContent = 'Read';
+    remove.textContent = 'Remove';
+
+    cardContainer.appendChild(bookCard);
+}
+
+function displayBooks() {
+    resetCardContainer();
+
+    for (let book of library.books) {
+        createCard(book);
+    }
+}
 
 const openModalButtons = document.querySelector('#addButton');
-const closeModalButtons = document.querySelector('#closeButton');
+//const closeModalButtons = document.querySelector('#closeButton');
 const overlay = document.getElementById('overlay');
 
 let modal = document.querySelector('#modal');
 modal.classList.add('rounded');
 
-closeModalButtons.addEventListener('click', closeModal);
+//closeModalButtons.addEventListener('click', closeModal);
 openModalButtons.addEventListener('click', openModal);
 
 let input = document.querySelectorAll('input');
@@ -54,45 +106,28 @@ function closeModal() {
     overlay.classList.remove('active');
 }
 
-function getAuthor() {
-    let authorField = document.getElementById('author').value;
-    curAuthor = authorField;
-}
-function getTitle() {
-    let titleField = document.getElementById('title').value;
-    curTitle = titleField;
+
+const getBook = () => {
+    const authorField = authorField = document.getElementById('author').value;
+    const titleField = document.getElementById('title').value;
+    const pagesField = document.getElementById('pages').value;
+    const checkField = document.getElementById('checkbox').checked;
+
+    return new Book(authorField, titleField, pagesField, checkField);
 }
 
-function getPages() {
-    let pagesField = document.getElementById('pages').value;
-    curPages = pagesField;
+const woah = () => {
+    library.addBookToLibrary(getBook);
+    displayBooks();
 }
 
-function getRead() {
-    let checkField = document.getElementById('checkbox');
-    if (checkField.checked == true) {
-        curRead = true;
-    } else {
-        curRead = false;
-    }
-}
+const addButton = document.getElementById("addButton");
+addButton.addEventListener('click', openModal);
 
 const submitButton = document.querySelector('#submitButton');
-// submitButton.addEventListener('click', getAuthor);
-// submitButton.addEventListener('click', getTitle);
-// submitButton.addEventListener('click', getPages);
-// submitButton.addEventListener('click', getRead);
+submitButton.addEventListener('click', woah)
 
-function woah() {
-    getAuthor();
-    getTitle();
-    getPages();
-    getRead();
-    const newBook = new Book(curAuthor, curTitle, curPages, curRead);
-    addBookToLibrary(newBook);
-    displayBooks();
-    console.log(newBook);
-    console.log(myLibrary);
-}
+const sampleBook = new Book('Peepo', 'PeepoAdventures', '24', true);
+library.books.push(sampleBook);
 
-submitButton.addEventListener('click', woah);
+displayBooks();
