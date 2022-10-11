@@ -51,9 +51,19 @@ const createCard = (book) => {
     const remove = document.createElement('button');
 
     bookCard.classList.add('book-card');
+    bookCard.classList.add('rounded');
     buttonContainer.classList.add('card-button-container');
-    read.classList.add('btn', 'btn-light');
-    remove.classList.add('btn', 'btn-light');
+
+    if (book.read) {
+        read.classList.add('btn', 'btn-success');
+    } else {
+        read.classList.add('btn', 'btn-danger');
+    }
+
+    remove.classList.add('btn', 'btn-dark', 'remove-button');
+
+    read.setAttribute('id', 'read-button');
+    remove.setAttribute('id', 'remove-button');
 
     bookCard.appendChild(title);
     bookCard.appendChild(author);
@@ -74,7 +84,7 @@ const createCard = (book) => {
 }
 
 function displayBooks() {
-
+    resetCardContainer();
     for (let book of library.books) {
         console.log(book);
         createCard(book);
