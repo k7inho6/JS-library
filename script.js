@@ -50,8 +50,18 @@ const createCard = (book) => {
     const read = document.createElement('button');
     read.setAttribute('id', `read-button-number-${library.books.indexOf(book)}`);
     const readId = read.id.split("-")[3];
-    read.addEventListener('click', console.log(readId));
 
+    function readAction() {
+        correspondingBook = library.books.find(book => library.books.indexOf(book) == readId);
+        if (!correspondingBook.read) {
+            correspondingBook.read = true;
+        } else {
+            correspondingBook.read = false;
+        }
+        displayBooks();
+    }
+
+    read.addEventListener('click', readAction);
     const remove = document.createElement('button');
 
     bookCard.classList.add('book-card');
