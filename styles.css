@@ -128,9 +128,9 @@ form {
   background-color: #52525b;
 }
 
-#read-button, #remove-button {
+.read-button, .remove-button {
   color: white;
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 .card-button-container {

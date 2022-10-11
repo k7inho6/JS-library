@@ -62,8 +62,8 @@ const createCard = (book) => {
 
     remove.classList.add('btn', 'btn-dark', 'remove-button');
 
-    read.setAttribute('id', 'read-button');
-    remove.setAttribute('id', 'remove-button');
+    read.classList.add('read-button');
+    remove.classList.add('remove-button');
 
     bookCard.appendChild(title);
     bookCard.appendChild(author);
@@ -145,6 +145,10 @@ function addAction() {
     pagesField.value = null;
     checkField.checked = false;
     openModal();
+}
+
+function readAction() {
+    const readButton = document.getElementById()
 }
 
 const addButton = document.getElementById("addButton");
