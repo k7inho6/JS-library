@@ -76,6 +76,7 @@ const createCard = (book) => {
 function displayBooks() {
 
     for (let book of library.books) {
+        console.log(book);
         createCard(book);
     }
 }
@@ -106,25 +107,41 @@ function closeModal() {
 }
 
 
-const getBook = () => {
-    const authorField = authorField = document.getElementById('author').value;
+function getBook() {
+    const authorField = document.getElementById('author').value;
     const titleField = document.getElementById('title').value;
     const pagesField = document.getElementById('pages').value;
     const checkField = document.getElementById('checkbox').checked;
 
-    return new Book(authorField, titleField, pagesField, checkField);
+    const newBook = new Book(authorField, titleField, pagesField, checkField);
+    return newBook;
 }
 
-const woah = () => {
-    library.addBookToLibrary(getBook);
+function submitAction() {
+    library.addBookToLibrary(getBook());
     displayBooks();
+    closeModal();
+}
+
+function addAction() {
+    const form = document.querySelector('form');
+    const authorField = document.getElementById('author');
+    const titleField = document.getElementById('title');
+    const pagesField = document.getElementById('pages');
+    const checkField = document.getElementById('checkbox');
+
+    authorField.value = null;
+    titleField.value = null;
+    pagesField.value = null;
+    checkField.checked = false;
+    openModal();
 }
 
 const addButton = document.getElementById("addButton");
-addButton.addEventListener('click', openModal);
+addButton.addEventListener('click', addAction);
 
 const submitButton = document.querySelector('#submitButton');
-submitButton.addEventListener('click', woah)
+submitButton.addEventListener('click', submitAction)
 
 const sampleBook = new Book('Peepo', 'PeepoAdventures', '24', true);
 library.books.push(sampleBook);
