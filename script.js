@@ -48,6 +48,10 @@ const createCard = (book) => {
 
     const buttonContainer = document.createElement('div');
     const read = document.createElement('button');
+    read.setAttribute('id', `read-button-number-${library.books.indexOf(book)}`);
+    const readId = read.id.split("-")[3];
+    read.addEventListener('click', console.log(readId));
+
     const remove = document.createElement('button');
 
     bookCard.classList.add('book-card');
@@ -150,7 +154,8 @@ function addAction() {
 }
 
 function readAction() {
-    
+    const bookIndex = this.id;
+    console.log(bookIndex);
 }
 
 const addButton = document.getElementById("addButton");
@@ -159,10 +164,8 @@ addButton.addEventListener('click', addAction);
 const submitButton = document.querySelector('#submitButton');
 submitButton.addEventListener('click', submitAction);
 
-const readButton = document.querySelector('.read-button');
-//readButton.addEventListener('click', readAction);
-
 const sampleBook = new Book('Peepo', 'PeepoAdventures', '24', true);
 library.books.push(sampleBook);
 
 displayBooks();
+
