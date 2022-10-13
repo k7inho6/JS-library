@@ -52,7 +52,7 @@ const createCard = (book) => {
     const readId = read.id.split("-")[3];
 
     function readAction() {
-        correspondingBook = library.books.find(book => library.books.indexOf(book) == readId);
+        let correspondingBook = library.books.find(book => library.books.indexOf(book) == readId);
         if (!correspondingBook.read) {
             correspondingBook.read = true;
         } else {
@@ -79,6 +79,22 @@ const createCard = (book) => {
     read.classList.add('read-button');
     remove.classList.add('remove-button');
 
+    remove.setAttribute('id', `remove-button-number-${library.books.indexOf(book)}`);
+    const removeId = remove.id.split("-")[3];
+
+    function removeAction() {
+        //let correspondingBook = library.books.find(book => library.books.indexOf(book) == removeId);
+        library.books = library.books.filter(book => library.books.indexOf(book) != removeId);
+        let aaa = library.books.filter(book => library.books.indexOf(book) != removeId);
+        console.log(library.books);
+        console.log(aaa);
+        console.log(library.books.indexOf(book));
+        console.log(removeId);
+        displayBooks();
+    }
+
+    remove.addEventListener('click', removeAction);
+
     bookCard.appendChild(title);
     bookCard.appendChild(author);
     bookCard.appendChild(title);
@@ -102,7 +118,7 @@ const createCard = (book) => {
 function displayBooks() {
     resetCardContainer();
     for (let book of library.books) {
-        console.log(book);
+        //  console.log(book);
         createCard(book);
     }
 }
