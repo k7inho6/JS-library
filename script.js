@@ -86,10 +86,10 @@ const createCard = (book) => {
         //let correspondingBook = library.books.find(book => library.books.indexOf(book) == removeId);
         library.books = library.books.filter(book => library.books.indexOf(book) != removeId);
         let aaa = library.books.filter(book => library.books.indexOf(book) != removeId);
-        console.log(library.books);
-        console.log(aaa);
-        console.log(library.books.indexOf(book));
-        console.log(removeId);
+        // console.log(library.books);
+        // console.log(aaa);
+        // console.log(library.books.indexOf(book));
+        // console.log(removeId);
         displayBooks();
     }
 
@@ -160,7 +160,13 @@ function getBook() {
 }
 
 function submitAction() {
-    library.addBookToLibrary(getBook());
+    let bookInput = getBook();
+    if (library.isInLibrary(bookInput)) {
+        alert('This title already exists in your library!');
+        return;    
+    }
+
+    library.addBookToLibrary(bookInput);
     displayBooks();
     closeModal();
 }
